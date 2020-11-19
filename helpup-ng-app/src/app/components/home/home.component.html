@@ -1,0 +1,118 @@
+<div class="all">
+
+  <!-- Filter posts -->
+  <div class="filters">
+    <form>
+
+      <!-- Post type -->
+      <div class="filter">
+        <p class="filter-title">Post Type</p>
+        <input (click)="selectFilter($event)" type="checkbox" id="dog" class="filter-checkbox" name="dog" value="dog">
+        <label for="dog">Dog</label><br>
+
+        <input (click)="selectFilter($event)" type="checkbox" id="cat" class="filter-checkbox" name="cat" value="cat">
+        <label for="cat">Cat</label><br>
+
+        <input (click)="selectFilter($event)" type="checkbox" id="bunny" class="filter-checkbox" name="bunny" value="bunny">
+        <label for="bunny">Bunny</label><br>
+
+        <input (click)="selectFilter($event)" type="checkbox" id="chromosome" class="filter-checkbox" name="chromosome" value="chromosome">
+        <label for="chromosome">+1 Chromosome</label><br>
+
+        <input (click)="selectFilter($event)" type="checkbox" id="asd" class="filter-checkbox" name="asd" value="asd">
+        <label for="asd">ASD</label><br>
+
+        <input (click)="selectFilter($event)" type="checkbox" id="other" class="filter-checkbox" name="other" value="other">
+        <label for="other">Other</label><br>
+      </div>
+
+      <!-- Between Dates  -->
+      <div class="filter">
+        <p class="filter-title">Date</p>
+        <label for="starting">Starting from</label>
+        <input (change)="selectFilter($event)" value="2020-09-01" type="date" id="starting" class="filter-date" name="starting">
+
+        <label for="ending">Ending with</label>
+        <input (change)="selectFilter($event)" value="2020-09-01" type="date" id="ending" class="filter-date" name="ending">
+      </div>
+
+      <!-- City -->
+      <div class="filter">
+        <p class="filter-title">City</p>
+        <input (change)="selectFilter($event)" type="checkbox" id="bucharest" class="filter-checkbox" name="city" value="Bucharest">
+        <label for="bucharest">Bucharest</label><br>
+
+        <input (change)="selectFilter($event)" type="checkbox" id="cluj" class="filter-checkbox" name="city" value="Cluj">
+        <label for="cluj">Cluj</label><br>
+
+        <input (change)="selectFilter($event)" type="checkbox" id="Timisoara" class="filter-checkbox" name="city" value="Timisoara">
+        <label for="Timisoara">Timisoara</label><br>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- Create post-->
+  <div class="center" *ngIf="!isAdmin()">
+    <h5>Create Post</h5>
+    <div *ngIf="errorMessage !== ''" class="error-message">{{errorMessage}}</div>
+    <form [formGroup]="postForm" class="px-4 py-3">
+      <div class="form-group">
+        <textarea class="form-control" formControlName="description" id="description"
+                  placeholder="Description..." maxlength="2000" rows="4" cols="50"></textarea>
+      </div>
+
+      <div class="form-group">
+        <input #fileInput type="file" accept="image/*" (change)="onFileChanged($event)">
+      </div>
+      <label for="post-type">Choose a post type:</label>
+      <select (change)="selectType($event)" id="post-type" name="type" style="display: block; margin-bottom: 10px">
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="bunny">Bunny</option>
+        <option value="chromosome">+1 chromosome</option>
+        <option value="asd">ASD</option>
+        <option value="other" selected>Other</option>
+      </select>
+
+      <input type="button" (click)="onUpload()" value="Post" class="btn button">
+    </form>
+  </div>
+
+
+  <!-- List with posts -->
+  <div class="posts">
+    <div *ngFor="let post of filteredPosts" class="post">
+      <img src="{{post.profilepic}}" class="profile-pic">
+      <span class="username" [routerLink]="['profile', post.username]">{{post.username}}</span>
+      <span class="date">‧ {{this.translateService.translateTime(post.date)}}</span>
+
+      <div>
+        <div style="float: right; margin-left: 3px">
+          <button *ngIf="isMine(post) && !post.editMode" type="button" class="btn btn-light"
+                  (click)="post.editMode = true;">Edit</button>
+          <button *ngIf="isAdmin() || isMine(post)" type="button" class="btn btn-light"
+                  (click)="deletePost(post.id)">Delete</button>
+        </div>
+
+        <form>
+          <div *ngIf="!post.editMode">
+            <p class="description"> {{post.description}} </p>
+
+          </div>
+          <div *ngIf="post.editMode">
+            <textarea maxlength="2000" rows="4" class="edit-description" #newDescription value="{{post.description}}"></textarea>
+            <button type="button" class="btn btn-light"
+                    (click)="saveDescriptionAfterEdit(post, newDescription.value);">SAVE</button>
+          </div>
+        </form>
+
+      </div>
+
+      <img [src]="this.translateService.translateImage(post.image)" class="post-image">
+
+    </div>
+  </div>
+
+  <div style="height: 50px"></div>
+</div>

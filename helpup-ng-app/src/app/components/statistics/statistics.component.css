@@ -1,0 +1,19 @@
+.container{
+  padding: 30px;
+}
+
+.chart-container-left{
+  float: left;
+  width: 400px;
+  height: 400px;
+}
+
+.chart-container-right{
+  float: right;
+  width: 400px;
+  height: 400px;
+}
+
+.chart-title{
+  text-align: center;
+}

@@ -1,0 +1,41 @@
+<div class="all">
+  <div id="wrapper">
+    <div>
+      <img class="center-image" src="assets/logo.png">
+    </div>
+
+    <div style="text-align: center">
+      <h3>Login to HelpUp</h3>
+    </div>
+    <br>
+    <div *ngIf="errorMessage != null" class="error-message">
+      {{errorMessage}}
+    </div>
+    <div class="center custom-center">
+      <form [formGroup]="regForm" class="px-4 py-3">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="username" class="form-control" formControlName="username" id="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" formControlName="password" id="password">
+        </div>
+
+        <button type="submit" (click)="onSubmit()" class="btn button">Login</button>
+      </form>
+      <br>
+
+    </div>
+  </div>
+
+    <!-- Redirect to register -->
+    <div class="center redirect-div custom-center">
+      <p class="redirect">New around here?</p>
+      <a class="dropdown-item" [routerLink]="['','register']">Sign up</a>
+    </div>
+
+    <div style="height: 100px">
+
+    </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="container">
+
+  <!-- History conversations -->
+  <div id="conversations">
+    <h3 id="your-conversations">Your conversations</h3>
+    <div id="history" *ngFor="let conversation of conversations">
+
+      <div id="{{getCssForAConversation(conversation)}}" (click)="openConversation(conversation)">
+        <img [src]="translateImage(conversation.icon)" alt="profile picture" id="profile-pictures">
+
+        <div id="conversations-username">
+          <p style="font-size: 17px">
+
+            <span *ngIf="conversation.chat[0] != undefined && conversation.from === getLastChat(conversation).receiver
+               && !getLastChat(conversation).seen; then whoSentLastMessageIfBlock else whoSentLastMessageElseBlock; "></span>
+
+            <ng-template #whoSentLastMessageIfBlock>
+              <span>{{whoAmITalkingTo(conversation)}}</span>
+            </ng-template>
+            <ng-template #whoSentLastMessageElseBlock>
+              <span style="font-weight: normal !important;">{{whoAmITalkingTo(conversation)}}</span>
+            </ng-template>
+          </p>
+
+          <p id="last-message">
+            <span *ngIf="conversation.chat[0] != undefined">
+               {{whoSentLastMessage(conversation)}}
+
+              <span *ngIf="conversation.from === getLastChat(conversation).receiver
+               && !getLastChat(conversation).seen; then lastMessageIf else lastMessageElse; "></span>
+              <ng-template #lastMessageIf>
+                <span style="font-weight: 600; color: black">{{getShortLastMessage(conversation)}}</span>
+              </ng-template>
+              <ng-template #lastMessageElse>{{getShortLastMessage(conversation)}}</ng-template>
+            </span>
+            <span *ngIf="conversation.chat[0] != undefined" id="timestamp" >{{getTimestamp(conversation)}}</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="whereAmIComingFrom() == '' then thenBlock else elseBlock"></div>
+
+  <!-- Welcome message-->
+  <ng-template #thenBlock>
+    <div id="welcome">
+      <h2 id="welcome-title">Welcome to HelpUp Messages!</h2>
+      <h4 class="welcome-text">This page will help you communicate with other users in order to give or receive pet
+        therapy. You can find anyone you talked to in the past and send them messages in the
+        <i>Your conversations</i> box.</h4>
+      <img id="welcome-image" src="../../../assets/teenagers.PNG">
+    </div>
+  </ng-template>
+
+  <!-- Conversation -->
+  <ng-template #elseBlock>
+    <!-- messages -->
+    <div id="conversation">
+      <div id="conversation-username-box">
+        <div *ngIf="this.chosenConversation !== undefined">
+          <img id="talking-to-image" alt="profile picture" [src]="this.translateImage(chosenConversation.icon)">
+          <p id="talking-to-username">{{this.chosenConversation.to}}</p>
+        </div>
+      </div>
+      <div #messagesScroll id="messages">
+        <div *ngIf="chosenConversation != undefined">
+
+          <div *ngFor="let chat of chosenConversation.chat">
+            <div id="message-received" *ngIf="chat.sender === whereAmIComingFrom()"> {{chat.message}}</div>
+            <div *ngIf="chat.receiver === whereAmIComingFrom()">
+              <div id="message-sent">{{chat.message}}</div>
+            </div>
+          </div>
+
+          <div *ngIf="chosenConversation.chat[0] != undefined && (getLastChat(chosenConversation).sender === this.chosenConversation.from)
+                  && getLastChat(chosenConversation).seen" id="seen">
+            seen
+          </div>
+        </div>
+      </div>
+      <!-- write message -->
+      <div id="write">
+        <input #messageInput type="text" id="input-message" placeholder="Type a message...">
+        <button (click)="submitMessage()" class="btn" id="send-button">SEND</button>
+      </div>
+
+    </div>
+
+  </ng-template>
+
+</div>
+
+<div style="height: 180px"></div>

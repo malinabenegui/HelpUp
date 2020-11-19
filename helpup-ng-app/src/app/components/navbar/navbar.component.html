@@ -1,0 +1,53 @@
+<nav class="navbar navbar-inverse" >
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="">HelpUp</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li *ngIf="cookies.check('username') && !isAdmin()"><a [routerLink]="['profile', this.cookies.get('username')]">Profile</a></li>
+      <li *ngIf="cookies.check('username') && isAdmin()"><a [routerLink]="['statistics']">Statistics</a></li>
+      <li *ngIf="cookies.check('username') && !isAdmin()">
+        <a [routerLink]="['chat']">
+          <span>Chat</span>
+          <div *ngIf="noOfNotifications !== '0'">
+            <div id="notifications">{{noOfNotifications}}</div>
+          </div>
+        </a>
+      </li>
+
+      <li><a routerLink="about">About Us</a></li>
+    </ul>
+
+    <!-- Search bar-->
+    <form *ngIf="cookies.check('username')" class="navbar-form navbar-left"
+          [formGroup]="searchForm" (clickOutside)="showDropdown = false"
+          id="search-form">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search" formControlName="searchField"
+               (click)="showDropdown = true;" (keyup)="onSubmit()">
+        <div *ngIf="showDropdown == true" class="state-container-dropdown" >
+
+          <!-- Searched users -->
+          <div *ngFor="let user of searchedUsers">
+            <div  (click)="clearSearchField()" [routerLink]="['profile', user.username]" id="search-username">
+              <img id="profile-pic" alt="profile-picture" src="{{translateImage(user.profilepic)}}">
+              <span style="margin-left: 5px">{{user.username}}</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+    <!-- Register Login Logout -->
+    <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="!this.cookies.check('jwt')"><a routerLink="register"><span class="glyphicon glyphicon-user"></span>
+        Sign Up</a></li>
+      <li *ngIf="!this.cookies.check('jwt')"><a routerLink="login"><span class="glyphicon glyphicon-log-in"></span>
+        Login</a></li>
+      <li *ngIf="this.cookies.check('jwt')" (click)="logout()"><a routerLink="login"><span
+        class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+

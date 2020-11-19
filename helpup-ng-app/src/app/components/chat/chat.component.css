@@ -1,0 +1,254 @@
+.container{
+  background-color: white;
+}
+
+/* History conversations */
+#conversations{
+  width: 30%;
+  height: 600px;
+  float: left;
+  border-right: 1px solid #dedede;
+}
+
+#your-conversations{
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+  border-bottom: 1px solid #ededed;
+}
+
+#conversation-user{
+  height: 100px;
+  margin-right: 10px;
+  font-weight: bold;
+  border-bottom: 1px solid #ededed;
+  cursor: pointer;
+}
+
+#clicked-conversation-user{
+  height: 100px;
+  margin-right: 10px;
+  font-weight: bold;
+  border-bottom: 1px solid #ededed;
+  border-radius: 10px;
+  background-color: #ededed;
+}
+
+#profile-pictures{
+  width: 70px;
+  height: 70px;
+  margin-top: 20px;
+  margin-left: 10px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: inline;
+  float: left;
+}
+#conversations-username{
+  width: 230px;
+  margin-top: 25px;
+  float: right;
+}
+#last-message{
+  font-weight: normal;
+  color: #6e6e6e;
+}
+#timestamp{
+  float: right;
+  margin-right: 10px;
+}
+
+
+/* WELCOME box*/
+#welcome{
+  width: 700px;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 40px;
+  float: right;
+}
+#welcome-title{
+  padding: 35px;
+}
+.welcome-text{
+  line-height: 30px;
+}
+#welcome-image{
+  width: 400px;
+}
+
+
+/* Conversation Messages*/
+#conversation{
+  margin-left: 40%;
+  margin-right: 20%;
+  height: 600px;
+
+  border-left: 1px solid #dedede;
+  border-right: 1px solid #dedede;
+  position: relative;
+}
+
+#conversation-username-box{
+  background: #ededed;
+  padding: 10px 10px 10px 30px;
+  margin-bottom: 5px;
+}
+
+#talking-to-image{
+  width: 60px;
+  height: 60px;
+  display: inline;
+  border-radius: 50%;
+  object-fit: cover;
+}
+#talking-to-username{
+  display: inline;
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#messages{
+  height: 465px;
+  overflow:scroll;
+}
+
+#message-sent{
+  float: right;
+  display: inline-block;
+  margin: 0 20px 3px 50%;
+  padding: 8px 17px;
+  border-radius: 50px;
+  background-color: #2284FF;
+  color: white;
+}
+
+#seen{
+  float: right;
+  display: inline-block;
+  margin: 0 10px 3px 50%;
+  padding: 0 17px;
+  border-radius: 50px;
+  color: #797979;
+}
+
+#message-received{
+  display: inline-block;
+  margin-bottom: 3px;
+  margin-left: 20px;
+  margin-right: 50%;
+  padding: 8px 13px;
+  border-radius: 50px;
+  background-color: #F1F0F0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+/* Track on hover */
+::-webkit-scrollbar-track:hover {
+  border-radius: 5px;
+  background: #f1f0f0;
+  display: block;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 5px;
+  background: #a3a3a3;
+  display: block;
+}
+
+/* Write message */
+#write{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+#input-message{
+  height: 35px;
+  width: 80%;
+  padding: 10px;
+  margin-left: 3%;
+  margin-bottom: 5px;
+
+  background: #f2f2f2;
+  float: left;
+  border: none;
+  border-radius: 50px;
+}
+
+::placeholder{
+  color: #797979;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+#send-button{
+  float: right;
+  margin-right: 7px;
+}
+
+@media only screen and (max-width: 900px){
+  /* History conversations */
+  #conversations{
+    width: 40%;
+    height: 600px;
+  }
+
+  #conversation-user{
+    height: 80px;
+    margin-right: 1px;
+  }
+
+  #clicked-conversation-user{
+    height: 80px;
+    margin-right: 1px;
+  }
+
+  #profile-pictures{
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
+    margin-left: 10px;
+  }
+
+  #conversations-username{
+    width: 180px;
+    margin-top: 13px;
+  }
+
+
+  /* Conversation Messages*/
+  #conversation{
+    margin-right: 0;
+  }
+
+  /* Welcome message*/
+  #welcome{
+    width: 400px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  #welcome-image{
+    width: 300px;
+  }
+
+}

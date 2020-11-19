@@ -1,0 +1,97 @@
+.center {
+  margin: auto;
+  width: 90%;
+  padding: 10px 0 10px 40px;
+  background: white;
+}
+
+h1{
+  margin-bottom: 40px;
+}
+
+p{
+  font-size: medium;
+}
+
+.text{
+  width: 60%;
+  float: left;
+}
+
+#2{
+  margin-left: 20px;
+}
+
+#h2-2{
+  margin-left: 250px;
+}
+#h2-3{
+  margin-top: 300px;
+}
+
+#teenagers{
+  width: 19%;
+  margin-left: 10%;
+  margin-top: -1%;
+}
+
+#boy{
+  float: left;
+  width: 18%;
+}
+
+#rocking{
+  width: 19%;
+  margin-left: 10%;
+}
+
+@media only screen and (max-width: 800px){
+  #teenagers{
+    float: right;
+    width: 35%;
+    margin: 0;
+  }
+
+  #h2-2{
+    margin-top: 150px;
+  }
+
+  #boy{
+    width: 35%;
+    float: left;
+    margin-top: 70px;
+  }
+
+  #rocking{
+    width: 35%;
+    float: right;
+    margin-top: -300px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #teenagers, #boy, #rocking{
+    float: none;
+    margin: 0;
+  }
+
+  #teenagers{
+    display: none;
+  }
+
+  .text{
+    float: none;
+    width: 100%;
+  }
+
+  #2{
+    margin: 0;
+  }
+
+  #h2-2{
+    margin: 0;
+  }
+  #h2-3{
+    margin: 0;
+  }
+}

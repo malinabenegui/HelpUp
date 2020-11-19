@@ -1,0 +1,249 @@
+#all{
+  background: #f2f2f2;
+  padding-top: 20px;
+}
+
+::placeholder{
+  opacity: 0.5;
+}
+
+.profile{
+  width: 61%;
+  margin: 0 auto auto 20%;
+  padding: 10px 10px 10px 20px;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+}
+
+.edit-name{
+  margin-bottom: 20px;
+}
+
+.name-input{
+  height: 35px;
+  font-size: large;
+  width: 30%;
+}
+
+#username-profile{
+  margin-top: -1%;
+  color: gray;
+  float: left;
+}
+
+#profile-pic{
+  margin-top: 20px;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+#profile-pic-container{
+  position: relative;
+  text-align: center;
+  width: 25%;
+  margin-left: 70%;
+  margin-top: -8%;
+  display: block;
+  cursor: pointer;
+}
+
+#profile-pic-container:hover{
+  opacity: 60%;
+}
+
+#profile-pic-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: x-large;
+}
+
+.message{
+  background-color: dimgray;
+  color: white;
+}
+
+.infos{
+  background: white;
+  width: 20%;
+  margin-top: 15px;
+  margin-left: 20%;
+  padding: 10px;
+  border-radius: 5px;
+  border: #c9c9c9 1px solid;
+  float: left;
+}
+
+input{
+  border-radius: 3px;
+  border: #c9c9c9 1px solid;
+}
+
+.edit-field{
+  margin-bottom: 5px;
+}
+
+.edit-span{
+  margin-top: 3px;
+}
+
+span{
+  float: left;
+  margin-right: 5px;
+}
+
+.posts-list{
+  background: white;
+  width: 40%;
+  margin: 15px auto auto 41%;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.post{
+  margin-bottom: 30px;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.post-profile-pic{
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-left: 10%;
+}
+
+.post-image{
+  width: 80%;
+  display:block;
+  margin:auto;
+}
+
+.username{
+  font-weight: bold;
+  font-size: 14px;
+  color: #3d3d3d;
+  cursor: pointer;
+  margin-left: 7px;
+  float: none;
+}
+
+.date{
+  color: #6e6e6e;
+  float:right;
+  padding-right: 15%;
+}
+
+.edit-description{
+  width: 50%;
+  margin-left: 10%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.description{
+  padding-left: 10%;
+  padding-right: 15%;
+  padding-top: 10px;
+}
+
+.btn-light{
+  border-radius: 5px;
+  border: #c9c9c9 1px solid;
+}
+
+@media only screen and (max-width: 1300px) {
+  .profile{
+    width: 70%;
+  }
+
+  #profile-pic-container{
+    width: 30%;
+    margin-left: 65%;
+    margin-top: -15%;
+  }
+
+
+  .infos{
+    width: 30%;
+    margin-left: 16%;
+  }
+}
+
+@media only screen and (max-width: 600px) and (min-width:401px){
+  .profile{
+    width: 84%;
+  }
+
+  #profile-pic-container{
+    width: 5%;
+    border-radius: 50%;
+    margin-left: -55%;
+    margin-top: 10%;
+    margin-bottom: 5%;
+  }
+
+  #profile-pic-container:hover{
+    width: 40%;
+    border-radius: 50%;
+    margin-left: -55%;
+    margin-top: 10%;
+    margin-bottom: 5%;
+  }
+
+  .infos{
+    width: 80%;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 800px) and (min-width:601px){
+  .profile{
+    width: 90%;
+    margin-left: 5%;
+    padding-top: 20px;
+  }
+
+  .infos{
+    width: 35%;
+    margin-left: 5%;
+  }
+
+  .posts-list{
+    width: 54%;
+    padding: 10px 10px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .profile{
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  #profile-pic-container{
+    width: 40%;
+    border-radius: 50%;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 5%;
+  }
+
+  .infos{
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .posts-list{
+    width: 90%;
+    padding: 10px 10px;
+    margin-top: 90%;
+    margin-left: 5%;
+  }
+}

@@ -1,0 +1,135 @@
+<div id="all">
+  <div class="profile" style="background-color: white">
+    <div *ngIf="userDetails.firstname == '' && userDetails.lastname == ''" style="height: 35px"></div>
+
+    <!-- Show first and last name -->
+    <h2 *ngIf="!editMode">{{this.userDetails.firstname}} {{this.userDetails.lastname}}</h2>
+
+    <!-- When editing first and last name -->
+    <div *ngIf="editMode" class="edit-name">
+      <input class="name-input" #firstname (change)="userDetails.firstname = firstname.value"
+             value="{{this.userDetails.firstname}}" placeholder="First name">
+      <input class="name-input" #lastname (change)="userDetails.lastname = lastname.value"
+             value="{{this.userDetails.lastname}}" placeholder="Last name">
+    </div>
+
+    <h3 id="username-profile">@{{this.userDetails.username}}</h3>
+
+    <!-- Profile Picture -->
+    <div id="profile-pic-container" (mouseenter)="onPhotoMode = true;" (mouseleave)="onPhotoMode = false;" >
+      <input #fileInput  style="display: none" type="file" accept="image/*" (change)="onFileChanged($event)">
+
+      <div *ngIf="onPhotoMode && isMine()" id="profile-pic-text" (click)="fileInput.click()">Edit</div>
+
+      <img *ngIf="userDetails.profilepic != null" [src]="userDetails.profilepic" (click)="fileInput.click()" id="profile-pic">
+    </div>
+
+    <div>
+      <button *ngIf="!isMine()" [routerLink]="['', 'chat', userDetails.username]" class="btn message">Message</button>
+      <button *ngIf="isMine() && !editMode" class="btn btn-light" (click)="this.editMode = true">Edit</button>
+      <button class="btn btn-light" *ngIf="editMode" (click)="saveEdit()">Save</button>
+    </div>
+  </div>
+
+
+  <form  class="infos">
+    <h4>About me</h4>
+
+    <!-- Edit fields -->
+    <div *ngIf="editMode; then editModeOn else editModeOff"></div>
+    <ng-template #editModeOn>
+      <div>
+        <input #description (change)="userDetails.description = description.value"
+               value="{{this.userDetails.description}}" placeholder="about me">
+      </div>
+
+      <hr>
+
+      <div class="edit-field">
+        <span class="glyphicon glyphicon-home edit-span"></span>
+        <input #city (change)="userDetails.city = city.value" value="{{this.userDetails.city}}"
+                placeholder="live in">
+      </div>
+
+      <div class="edit-field">
+        <span class="glyphicon glyphicon-education edit-span"></span>
+        <input #education (change)="userDetails.education = education.value" value="{{this.userDetails.education}}"
+                placeholder="studied at">
+      </div>
+
+      <div class="edit-field">
+        <span class="glyphicon glyphicon-briefcase edit-span"></span>
+        <input #job (change)="userDetails.job = job.value" value="{{this.userDetails.job}}"
+                placeholder="work at">
+      </div>
+
+      <div class="edit-field">
+        <span class="glyphicon glyphicon-earphone edit-span"></span>
+        <input #phonenumber (change)="userDetails.phonenumber = phonenumber.value"
+               value="{{this.userDetails.phonenumber}}" placeholder="phone number">
+      </div>
+    </ng-template>
+
+    <!-- Appearing fields -->
+    <ng-template #editModeOff>
+      <p>{{this.userDetails.description}}</p>
+
+      <hr>
+
+      <div *ngIf="this.userDetails.city != null && this.userDetails.city.length > 0">
+        <span class="glyphicon glyphicon-home"></span>
+        <p>Lives in {{this.userDetails.city}}</p>
+      </div>
+
+      <div *ngIf="this.userDetails.education != null && this.userDetails.education.length > 0">
+        <span class="glyphicon glyphicon-education"></span>
+        <p>Studied at {{this.userDetails.education}}</p>
+      </div>
+
+      <div *ngIf="this.userDetails.job != null && this.userDetails.job.length > 0">
+        <span class="glyphicon glyphicon-briefcase"></span>
+        <p>Works at {{this.userDetails.job}}</p>
+      </div>
+
+      <div *ngIf="this.userDetails.phonenumber != null && this.userDetails.phonenumber.length > 0">
+        <span class="glyphicon glyphicon-earphone"></span>
+        <p>Call at {{this.userDetails.phonenumber}}</p>
+      </div>
+    </ng-template>
+  </form>
+
+  <!-- List of user's Posts -->
+  <div class="posts-list" *ngIf="retrievedPosts != null && retrievedPosts.length > 0">
+    <div *ngFor="let post of retrievedPosts" class="post">
+      <img [src]="this.userDetails.profilepic" class="post-profile-pic">
+      <span class="username">@{{post.username}}</span>
+      <span class="date">‧ {{this.translateService.translateTime(post.date)}}</span>
+
+      <div>
+        <div style="float: right; margin-left: 3px">
+          <button type="button" class="btn btn-light"
+                  *ngIf="isMine() && !post.editMode" (click)="post.editMode = true;">Edit</button>
+          <button type="button" class="btn btn-light" *ngIf="isAdmin() || isMine()"
+                  (click)="deletePost(post.id)">Delete</button>
+        </div>
+
+        <form>
+          <div *ngIf="!post.editMode">
+            <p class="description"> {{post.description}} </p>
+          </div>
+
+          <div *ngIf="post.editMode">
+            <input class="edit-description" #newDescription value="{{post.description}}">
+            <button (click)="saveDescriptionAfterEdit(post, newDescription.value);">SAVE</button>
+          </div>
+        </form>
+
+      </div>
+
+      <img [src]="this.translateService.translateImage(post.image)" class="post-image">
+    </div>
+  </div>
+
+  <div *ngIf="retrievedPosts == undefined || retrievedPosts.length == 0" style="height: 300px"></div>
+  <div style="height: 90px"></div>
+</div>
